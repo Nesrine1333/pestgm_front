@@ -14,6 +14,9 @@ export class EnergyService {
     return this.http.get(`${this.apiUrl}/provider/${address}`);
   }
 
+  getAllProviders(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/providers/addresses`);
+  }
   registerProvider(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/registerProvider`, data);
   }
@@ -23,22 +26,27 @@ export class EnergyService {
   }
 
 
-  buyEnergy(energyAmount: number, consumerAddress: string): Observable<any> {
+  buyEnergy( userEmail: string, energyAmount: number,consumerAddress:string): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = { energyAmount };
+    const body = {userEmail , energyAmount,consumerAddress};
     const url = `${this.apiUrl}/buy-energy`;
     
     return this.http.post(url, body, { headers });
   }
 
-  getConsumerBalance(consumerAddress: string): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/consumer-balance/${consumerAddress}`);
-  }
 //  getConsumerEnergyBalance(consumerAddress: string): Observable<any> {
 //     return this.http.get<any>(`${this.apiUrl}/getConsumerEnergyBalance/${consumerAddress}`);
 //   }
   getConsumerEtherBalance(consumerAddress: string): Observable<any> {
     const url = `${this.apiUrl}/getConsumerEtherBalance/${consumerAddress}`;
     return this.http.get<any>(url);
+  }
+
+
+  // getConsumerInfo(email: string): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/consumer-balance`, { email });
+  // }
+  getConsumerInfo(email: string):Observable<any>{
+    return this.http.post(`${this.apiUrl}/getCustomerInfo`, { email })
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interface/user';
 
 @Component({
   selector: 'app-update-provider',
@@ -11,5 +12,15 @@ export class UpdateProviderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  user: User = {
+    email: '',
+    password: '',
+    name: '',
+    location:'',
+
+    
+  };
+  message: string = '';
 
 }

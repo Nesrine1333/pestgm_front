@@ -1,46 +1,31 @@
-<div class="container">
-    <h2>Consumer Balance</h2>
-  
-    <div class="form-group">
-      <label for="consumerAddress">Consumer Address:</label>
-      <input type="text" class="form-control" id="consumerAddress" [(ngModel)]="consumerAddress" placeholder="Enter consumer address">
+<div class="content">
+  <app-sidebar [isCollapsed]="isCollapsed" (toggleSidebar)="toggleSidebar()"></app-sidebar>
+  <div class="contentContainer" >
+    <div class="header">
+      <h2>Dashboard</h2>
+      <div>Hello {{ loggedInUser?.name }}</div>
+   
     </div>
-  
-    <button type="button" class="btn btn-primary" (click)="fetchConsumerBalance()">Fetch Balance</button>
-    <button type="button" class="btn btn-primary" (click)="getEtherBalance()">Fetch Ether</button>
-    <div *ngIf="balance !== null">
-      <p>Consumer Address: {{ consumerAddress }}</p>
-      <p>Energy Balance: {{ consumerBalance }}</p>
-      <p>Entheer Balance: {{ etherBalance }}</p>
-    </div>
-  
-    <div class="error-message" *ngIf="errorMessage">
-      <p>{{ errorMessage }}</p>
-    </div>
-    <!-- <div *ngIf="etherBalance !== undefined">
-        <p>Consumer Ether Balance: {{ etherBalance }} ETH</p>
-      </div>
-      <button (click)="fetchConsumerBalance()">Fetch Balance</button> -->
-    <!-- <div>
-        <div>
-            <h2>Check Consumer Energy Balance</h2>
-            <input type="text" [(ngModel)]="consumerAddress" placeholder="Enter consumer address">
-            <button (click)="getEnergyBalance()">Get Energy Balance</button>
-          
-            <div *ngIf="energyBalance !== null">
-              <p>Energy Balance: {{ energyBalance }} units</p>
-            </div>
-            <div *ngIf="errorMessage">
-              <p>{{ errorMessage }}</p>
-            </div>
-          </div>
-    
-</div> -->
 
-<div>
-    <h1>Buy Energy</h1>
-    <input type="number" [(ngModel)]="energyAmount" placeholder="Energy Amount">
-    <button (click)="buyEnergy()">Buy Energy</button>
-    <button *ngIf="!consumerAddress" (click)="connectMetaMask()">Connect MetaMask</button>
-    <p>{{ message }}</p>
+    <div class="buy-energy">
+      <h1>Buy Energy</h1>
+      <input type="number" [(ngModel)]="energyAmount" placeholder="Energy Amount">
+      <button (click)="buyEnergy()">Buy Energy</button>
+    </div>
+
+    <div class="consumer-info">
+      <h2>Get Consumer Info</h2>
+      <div>
+        <button (click)="getConsumerInfo()">Get Info</button>
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="consumerInfo">
+        <h3>Consumer Info:</h3>
+        <p><strong>Energy Balance:</strong> {{ consumerInfo.energyBalance }}</p>
+        <p><strong>Ether Balance:</strong> {{ consumerInfo.etherBalance }}</p>
+      </div>
+    </div>
+  </div>
 </div>
